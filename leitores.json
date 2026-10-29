@@ -1,0 +1,12 @@
+[
+    {
+        "idLeitor": 1,
+        "nome": "Ana Silva",
+        "email": "ana@email.com"
+    },
+    {
+        "idLeitor": 2,
+        "nome": "João Santos",
+        "email": "joao@email.com"
+    }
+]
