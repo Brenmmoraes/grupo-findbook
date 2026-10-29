@@ -1,6 +1,7 @@
 
+import json
+from pathlib import Path
 from src.modelos import Leitor, Livro, Exemplar, Emprestimo
-
 
 leitor = Leitor(1, "João", "joao@email.com")
 
