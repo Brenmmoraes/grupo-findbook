@@ -1,4 +1,5 @@
 import unittest
+import json
 from src.modelos.leitor import Leitor
 
 def test_serializacao_leitor():
