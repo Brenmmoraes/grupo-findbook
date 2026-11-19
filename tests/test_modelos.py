@@ -8,18 +8,24 @@ class TestEmprestimo(unittest.TestCase):
     def test_exemplar_disponivel(self):
         leitor = Leitor(1, "João")
         livro = Livro("9781234567890", "Harry Potter")
-        exemplar = Exemplar("E001", True, "Estante A", livro)
+        exemplar = Exemplar(
+            idExemplar="E001", ISBN=livro.isbn, estado=True,
+            localizacao="Estante A", livro=livro,
+        )
         emprestimo = Emprestimo(1, leitor, exemplar)
 
-        self.assertTrue(emprestimo.pode_realizar())
+        self.assertIs(emprestimo.pode_realizar(), True)
 
     def test_exemplar_indisponivel(self):
         leitor = Leitor(1, "João")
         livro = Livro("9781234567891", "O Senhor dos Anéis")
-        exemplar = Exemplar("E002", False, "Estante B", livro)
+        exemplar = Exemplar(
+            idExemplar="E002", ISBN=livro.isbn, estado=False,
+            localizacao="Estante B", livro=livro,
+        )
         emprestimo = Emprestimo(2, leitor, exemplar)
 
-        self.assertFalse(emprestimo.pode_realizar())
+        self.assertIs(emprestimo.pode_realizar(), False)
 
 
 if __name__ == "__main__":

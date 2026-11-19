@@ -20,11 +20,11 @@ def criar_tabela(caminho="dados/findbook.db"):
 
 
 def adicionar_leitor(objeto, caminho="dados/findbook.db"):
-    """Guarda um Leitor; um ID já existente mantém os seus dados."""
+    """Guarda um Leitor e devolve True se criou um registo, False se o ID existe."""
     dados = objeto.para_dicionario()
     with closing(sqlite3.connect(caminho)) as ligacao:
         with ligacao:
-            ligacao.execute(
+            cursor = ligacao.execute(
                 """
                 INSERT INTO leitores (idLeitor, nome, email)
                 VALUES (?, ?, ?)
@@ -32,6 +32,7 @@ def adicionar_leitor(objeto, caminho="dados/findbook.db"):
                 """,
                 (dados["idLeitor"], dados["nome"], dados["email"]),
             )
+            return cursor.rowcount == 1
 
 
 def listar_leitores(caminho="dados/findbook.db"):

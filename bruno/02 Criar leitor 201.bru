@@ -1,0 +1,39 @@
+meta {
+  name: 02 Criar leitor 201
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/leitores
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "idLeitor": {{idLeitor}},
+    "nome": "{{nomeLeitor}}",
+    "email": "{{emailLeitor}}"
+  }
+}
+
+tests {
+  test("POST cria um novo leitor com 201", function () {
+    expect(res.getStatus()).to.equal(201);
+    expect(res.getBody()).to.deep.equal({
+      idLeitor: Number(bru.getVar("idLeitor")),
+      nome: bru.getEnvVar("nomeLeitor"),
+      email: bru.getEnvVar("emailLeitor")
+    });
+  });
+}
+
+docs {
+  Executar primeiro o pedido 01 para escolher um ID livre.
+  O nome e o email são definidos no ambiente Local: nomeLeitor e emailLeitor.
+}

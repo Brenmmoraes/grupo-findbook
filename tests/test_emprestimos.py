@@ -13,5 +13,5 @@ class TesteAgendamento(unittest.TestCase):
 
     def teste_aceita_sessao_sem_conflito(self):
         self.assertTrue(
-            pode
+            pode_agendar_sessao(data_no_periodo=True, existe_conflito=False)
         )

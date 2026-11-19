@@ -1,0 +1,30 @@
+meta {
+  name: 05 Nome vazio 400
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/leitores
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "idLeitor": 4,
+    "nome": "",
+    "email": "sem_nome@exemplo.pt"
+  }
+}
+
+tests {
+  test("Nome vazio devolve 400 com mensagem de erro", function () {
+    expect(res.getStatus()).to.equal(400);
+    expect(res.getBody()).to.have.property("erro");
+  });
+}

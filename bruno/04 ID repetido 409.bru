@@ -1,0 +1,35 @@
+meta {
+  name: 04 ID repetido 409
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/leitores
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "idLeitor": {{idLeitor}},
+    "nome": "Outro nome",
+    "email": "outro@exemplo.pt"
+  }
+}
+
+tests {
+  test("ID repetido devolve 409 com mensagem de erro", function () {
+    expect(res.getStatus()).to.equal(409);
+    expect(res.getBody()).to.have.property("erro");
+  });
+}
+
+docs {
+  Executar depois de criar o leitor no pedido 02. Repetir o pedido 03
+  confirma que os dados originais do leitor foram preservados.
+}

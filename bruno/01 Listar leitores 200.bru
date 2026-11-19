@@ -1,0 +1,36 @@
+meta {
+  name: 01 Listar leitores 200
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/leitores
+  body: none
+  auth: none
+}
+
+tests {
+  test("GET devolve 200 e uma lista JSON", function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody()).to.be.an("array");
+  });
+}
+
+script:post-response {
+  // Prepara um ID livre para a criação desta execução, mantendo os leitores.
+  const leitores = res.getBody();
+  if (res.getStatus() === 200 && Array.isArray(leitores)) {
+    const usados = new Set(leitores.map(leitor => leitor.idLeitor));
+    let livre = 1;
+    while (usados.has(livre)) {
+      livre++;
+    }
+    bru.setVar("idLeitor", livre);
+  }
+}
+
+docs {
+  Executar a coleção completa pela ordem numérica. Este GET escolhe um ID
+  livre para os pedidos 02, 03 e 04; os leitores existentes são mantidos.
+}

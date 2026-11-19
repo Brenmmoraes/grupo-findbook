@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
 .venv/
+.env
+.env.*
+!.env.example
+dados/*.db
+dados/*.db-*
+dados/*.sqlite
+dados/*.sqlite-*

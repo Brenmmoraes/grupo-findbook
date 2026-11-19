@@ -1,0 +1,23 @@
+meta {
+  name: 03 Confirmar leitor 200
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/leitores
+  body: none
+  auth: none
+}
+
+tests {
+  test("GET confirma o leitor guardado no SQLite", function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody()).to.be.an("array");
+    expect(res.getBody()).to.deep.include({
+      idLeitor: Number(bru.getVar("idLeitor")),
+      nome: bru.getEnvVar("nomeLeitor"),
+      email: bru.getEnvVar("emailLeitor")
+    });
+  });
+}

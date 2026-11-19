@@ -1,0 +1,18 @@
+meta {
+  name: 06 Rota inexistente 404
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/nao-existe
+  body: none
+  auth: none
+}
+
+tests {
+  test("Rota inexistente devolve 404 em JSON", function () {
+    expect(res.getStatus()).to.equal(404);
+    expect(res.getBody()).to.have.property("erro");
+  });
+}
